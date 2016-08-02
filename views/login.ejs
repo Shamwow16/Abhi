@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body ng-app="abhiApp">
+<div ng-controller="loginCtrl as login" class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <h1>Login</h1>
+
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
+        <!-- LOGIN FORM -->
+        <form  name="loginForm" action="/login" method="post" novalidate>
+            <div class="form-group">
+                <label>
+                    Email Address
+                </label>
+                <input type="email" name="email" ng-model="login.loginEmail" value="loginEmail"
+                       required>
+                <div ng-show="loginForm.$submitted">
+                    <span ng-show="loginForm.email.$error.required">Need an email address.</span>
+                    <span ng-show="loginForm.email.$error.email">This is not a valid email address.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    Password
+                </label>
+                <input type="password" name="password" ng-model="login.loginPassword" value="loginPassword" required>
+                <div ng-show="loginForm.$submitted">
+                    <span ng-show="loginForm.password.$error.required">Need a password.</span>
+                </div>
+            </div>
+
+            <button class="user-submit btn btn-primary btn-lg" ng-disabled="loginForm.$invalid" type="submit">Login</button>
+        </form>
+
+        <hr>
+
+        <p>Need an account? <a href="/signup">Sign Up</a></p>
+        <p>Or go <a href="/">Home</a>.</p>
+
+    </div>
+
+</div>
+<% include ./partials/layout%>
+</body>
+
+</html>

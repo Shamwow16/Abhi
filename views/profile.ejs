@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<% include ./partials/head %>
+<body ng-app="abhiApp">
+<div class="container" ng-controller="dashboardCtrl as dashboard">
+
+    <div class="page-header">
+        <h1 class="text-center">My Abhi Dashboard</h1>
+        <div class="text-right">
+
+            <%= user.local.email %>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="row">
+            <div class="well" >
+                <input class="col-sm-offset-4 col-sm-4" ng-change="dashboard.filterList()" ng-model="dashboard.search" type="text" placeholder="How can we curry your favor?">
+                <button type="submit" class="btn btn-md btn-danger">Search</button>
+            </div>
+        </div>
+
+        <ul>
+            <li ng-repeat="restaurant in dashboard.filteredList">
+                {{restaurant.restaurantName}}
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+<% include ./partials/layout %>
+<script src="/js/controllers/dashboardController.js"></script>
+<script src="/js/factories/restaurantDataService.js"></script>
+</body>
+</html>
